@@ -19,21 +19,3 @@ quickselect <- function(vec, k) {
     .Call(`_quantquickr_quickselect`, vec, k)
 }
 
-#' Finds the k-th element in the sorted list efficiently
-#'
-#' This function finds the k-th element in the sorted list using the Quickselect algorithm.
-#'
-#' @param vec A numeric vector.
-#' @param k The desired rank of the element (1-based index).
-#'
-#' @return The k-th element in the sorted list.
-#'
-#' @examples
-#' vec <- c(3, 1, 4, 2, 5)
-#' quickselect(vec, 3)
-#'
-#' @export
-quickselect2 <- function(vec, k) {
-    .Call(`_quantquickr_quickselect2`, vec, k)
-}
-

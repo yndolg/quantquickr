@@ -1,22 +1,12 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+#include <iostream>
 #include <vector>
 #include <algorithm>
-
+#include <random>
+#include <chrono>
 using namespace std;
-// This is a simple function using Rcpp that creates an R list
-// containing a character vector and a numeric vector.
-//
-// Learn more about how to use Rcpp at:
-//
-//   http://www.rcpp.org/
-//   http://adv-r.had.co.nz/Rcpp.html
-//
-// and browse examples of code using Rcpp at:
-//
-//   http://gallery.rcpp.org/
-//
 
 
 void insertSort(vector<double>& vec){
@@ -31,17 +21,35 @@ void insertSort(vector<double>& vec){
   }
 }
 
+template <typename Iterator>
+void insertionSort(Iterator begin, Iterator end) {
+  for (auto it = begin; it != end; ++it) {
+    auto key = *it;
+    auto prevIt = it;
+
+    while (prevIt != begin && *(prevIt - 1) > key) {
+      *prevIt = *(prevIt - 1);
+      --prevIt;
+    }
+
+    *prevIt = key;
+  }
+}
+
+
+
 double medianOfMedians(vector<double> vec, int low, int high) {
   std::vector<double> medians;
   for(int i = low; i <= high; i += 5) {
-    std::vector<double> part(vec.begin()+ i, vec.begin() + std::min(i + 5, high+1));
+    int end = std::min(i + 5, high+1);
+    int length = end - i;
 
-    insertSort(part);
-    double med = part[(int) (part.size() / 2)];
-    medians.push_back(med);
+    insertionSort(vec.begin() + i, vec.begin() + end);
+
+    medians.push_back(*(vec.begin() + i + (int) (length/2.0)));
   }
 
-  if(medians.size() == 1) {
+  if(medians.size() <= 2) {
     return medians[0];
   }
   return medianOfMedians(medians, 0, medians.size()-1);
@@ -80,7 +88,6 @@ double quickselect_impl(std::vector<double>& vec, int low, int high, int k) {
   return -1;
 }
 
-
 //' Finds the k-th element in the sorted list efficiently
 //'
 //' This function finds the k-th element in the sorted list using the Quickselect algorithm.
@@ -99,6 +106,4 @@ double quickselect_impl(std::vector<double>& vec, int low, int high, int k) {
 double quickselect(std::vector<double> vec, int k) {
   return quickselect_impl(vec, 0, vec.size() - 1, k);
 }
-
-
 

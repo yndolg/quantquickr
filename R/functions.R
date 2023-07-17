@@ -1,19 +1,3 @@
-# Hello, world!
-#
-# This is an example function named 'hello'
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Install Package:           'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
-
-
 #' Calculate the Median of a Vector
 #'
 #' This function calculates the median of a numeric vector using the \code{\link{quickselect}} algorithm.
@@ -28,7 +12,7 @@
 #'
 #' @export
 median <- function(vec) {
-  return(quickselect(vec, length(vec)))
+  return(quickselect(vec, floor(length(vec)/2)+1))
 }
 
 #' Calculate the Quantile of a Vector
@@ -46,6 +30,6 @@ median <- function(vec) {
 #'
 #' @export
 quantile <- function(vec, quantile) {
-  return(quickselect(vec, floor(length(vec) * quantile)))
+  return(quickselect(vec, floor(length(vec) * quantile) + 1))
 }
 

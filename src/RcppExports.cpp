@@ -22,22 +22,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// quickselect2
-double quickselect2(std::vector<double> vec, int k);
-RcppExport SEXP _quantquickr_quickselect2(SEXP vecSEXP, SEXP kSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::vector<double> >::type vec(vecSEXP);
-    Rcpp::traits::input_parameter< int >::type k(kSEXP);
-    rcpp_result_gen = Rcpp::wrap(quickselect2(vec, k));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_quantquickr_quickselect", (DL_FUNC) &_quantquickr_quickselect, 2},
-    {"_quantquickr_quickselect2", (DL_FUNC) &_quantquickr_quickselect2, 2},
     {NULL, NULL, 0}
 };
 
