@@ -1,0 +1,13 @@
+Package: quantquickr
+Type: Package
+Title: QuantQuickR
+Version: 0.1.0
+Author: Marius, Niels
+Description: This package implements the quickselect algorithm using Rcpp for an
+    efficient implementation of median, quickselect and quantile.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: Rcpp (>= 1.0.9)
+LinkingTo: Rcpp
+RoxygenNote: 7.2.3
